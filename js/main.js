@@ -14,74 +14,77 @@ function createDeck(cards) {
   return shuffledCards;
 }
 
-function showCard(card) {
-  var cardEl = document.getElementById("current-card");
-  showElement(cardEl);
-  var questionEl = document.getElementById("question");
-  questionEl.textContent = card.question;
-  var sourceEl = document.getElementById("source");
-  sourceEl.textContent = card.source;
+function getElement(id) {
+  return document.getElementById(id);
 }
 
 function showElement(element) {
-  if (element.classList.contains("invisible")) {
-    element.classList.remove("invisible");
+  if (!element.classList.contains("invisible")) {
+    return;
   }
+  element.classList.remove("invisible");
 }
 
 function hideElement(element) {
+  if (element.classList.contains("invisible")) {
+    return;
+  }
   element.classList.add("invisible");
 }
 
-function currentDeckSize() {
-  return deck.length - currCardIndex - 1;
+function updateCardContent(card) {
+  getElement("question").textContent = card.question;
+  getElement("source").textContent = card.source;
 }
 
-function setDeckHeight(deckEl) {
-  var shadowSize = 10 * currentDeckSize() / deck.length;
-  deckEl.style.boxShadow = "0 " + shadowSize + "px #b0b0b0, 0 2px 6px 2px rgba(0, 0, 0, 0.15)"
-}
-
-function updateDeckStyle() {
-  var deckEl = getDeckElement()
-  if (currCardIndex === deck.length - 1) {
-    hideElement(deckEl);
+function updateCurrCardUI() {
+  var currCardEl = getElement("current-card");
+  if (state.currCard === -1) {
+    hideElement(currCardEl);
   } else {
-    showElement(deckEl);
-    setDeckHeight(deckEl);
+    showElement(currCardEl);
+    updateCardContent(state.deck[state.currCard]);
   }
+}
+
+function currentDeckSize() {
+  return state.deck.length - state.currCard - 1;
+}
+
+function updateDeckHeight(deckEl) {
+  var shadowSize = 10 * currentDeckSize() / state.deck.length;
+  var boxShadow = "0 " + shadowSize + "px #b0b0b0, 0 2px 6px 2px rgba(0, 0, 0, 0.15)";
+  deckEl.style.boxShadow = boxShadow;
 }
 
 function updateCounter() {
-  var counterEl = document.getElementById("deck-counter");
-  counterEl.textContent = currentDeckSize() + " / " + deck.length;
+  var content = currentDeckSize() + " / " + state.deck.length;
+  getElement("deck-counter").textContent = content;
 }
 
-function updateUI() {
-  if (currCardIndex === -1) {
-    var cardEl = document.getElementById("current-card");
-    hideElement(cardEl);
+function updateDeckUI() {
+  var deckEl = getElement("deck");
+  if (state.currCard === state.deck.length - 1) {
+    hideElement(deckEl);
   } else {
-    showCard(deck[currCardIndex]);
+    showElement(deckEl);
+    updateDeckHeight(deckEl);
   }
-  updateDeckStyle();
   updateCounter();
 }
 
 function showNextCard() {
-  if (currCardIndex === deck.length - 1) {
+  if (state.currCard === state.deck.length - 1) {
     return;
   }
-  currCardIndex++;
-  updateUI();
+  updateCurrCard(state.currCard + 1);
 }
 
 function showPrevCard() {
-  if (currCardIndex === -1) {
+  if (state.currCard === -1) {
     return;
   }
-  currCardIndex--;
-  updateUI();
+  updateCurrCard(state.currCard - 1);
 }
 
 function keydownHandler(event) {
@@ -94,22 +97,36 @@ function keydownHandler(event) {
   }
 }
 
-function getDeckElement() {
-  return document.getElementById("deck");
+function updateDeck(deck) {
+  state.deck = deck;
+  onStateChanged();
 }
 
-var deck, currCardIndex;
+function updateCurrCard(currCard) {
+  state.currCard = currCard;
+  onStateChanged();
+}
+
+function onStateChanged() {
+  updateCurrCardUI();
+  updateDeckUI();
+}
+
+// deck: array of cards in the deck
+// currCard: index of the current card shown
+var state = {
+  deck: [],
+  currCard: -1
+};
 
 function main() {
-  deck = createDeck(cards);
-  currCardIndex = -1;
+  // Initialize state.
+  // cards is defined globally in cards.js
+  updateDeck(createDeck(cards));
 
-  var deckEl = getDeckElement();
-  deckEl.addEventListener("click", showNextCard);
-
+  // Initialize event listeners.
+  getElement("deck").addEventListener("click", showNextCard);
   document.addEventListener("keydown", keydownHandler);
-
-  updateCounter();
 }
 
 main();
