@@ -1,3 +1,19 @@
+@font-face {
+  font-family: 'Tofino Pro';
+  src: url('../fonts/tofinopro-book.woff2') format('woff2'),
+       url('../fonts/tofinopro-book.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino Pro';
+  src: url('../fonts/tofinopro-bookitalic.woff2') format('woff2'),
+       url('../fonts/tofinopro-bookitalic.woff') format('woff');
+  font-weight: normal;
+  font-style: italic;
+}
+
 html {
   height: 100%;
 }
@@ -10,15 +26,15 @@ body {
   justify-content: center;
   align-items: center;
   background-color: #f9f9f9;
-  font-family: sans-serif;
-  color: #666;
+  font-family: "Tofino Pro", Helvetica, Arial, sans-serif;
+  color: #333;
 }
 
 .card {
   box-sizing: border-box;
   width: 300px;
   height: 420px;
-  padding: 30px 50px;
+  padding: 30px 45px;
   border-radius: 12px;
   box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15);
   background-size: cover;
@@ -36,12 +52,12 @@ body {
 
 .front {
   background-image: url("../images/card_front.png");
+  margin-left: 150px;
 }
 
 .back {
   background-image: url("../images/card_back.png");
   cursor: pointer;
-  margin-left: 150px;
   box-shadow: 0 10px #b0b0b0, 0 2px 6px 2px rgba(0, 0, 0, 0.15)
 }
 
@@ -53,6 +69,16 @@ body {
 .question {
   margin: auto;
   font-size: 24px;
+  line-height: 1.2;
+}
+
+.italic {
+  font-size: 13px;
+  font-style: italic;
+}
+
+.source {
+  font-size: 18px;
 }
 
 .card-container {
@@ -62,6 +88,6 @@ body {
 .counter {
   position: absolute;
   bottom: -50px;
-  right: 20px;
+  left: 20px;
   color: #aaa;
 }
