@@ -32,19 +32,42 @@ function hideElement(element) {
   element.classList.add("invisible");
 }
 
-function updateCardContent(card) {
-  getElement("question").textContent = card.question;
-  getElement("source").textContent = card.source;
+function updateCardContent(cardEl, card) {
+  var questionEl = cardEl.getElementsByClassName("question")[0];
+  questionEl.textContent = card.question;
+  var sourceEl = cardEl.getElementsByClassName("source")[0];
+  sourceEl.textContent = card.source;
+}
+
+function isInvisible(element) {
+  return element.classList.contains("invisible");
+}
+
+function isVisible(element) {
+  return !isInvisible(element);
+}
+
+function getCardElement(filterFn) {
+  var cards = document.getElementsByClassName("card front");
+  cards = Array.prototype.slice.call(cards);
+  cards = cards.filter(filterFn);
+  if (cards.length === 0) {
+    return null;
+  }
+  return cards[0];
 }
 
 function updateCurrCardUI() {
-  var currCardEl = getElement("current-card");
-  if (state.currCard === -1) {
-    hideElement(currCardEl);
-  } else {
-    showElement(currCardEl);
-    updateCardContent(state.deck[state.currCard]);
+  var invisibleCardEl = getCardElement(isInvisible);
+  var visibleCardEl = getCardElement(isVisible);
+  if (visibleCardEl !== null) {
+    hideElement(visibleCardEl);
   }
+  if (state.currCard === -1) {
+    return;
+  }
+  updateCardContent(invisibleCardEl, state.deck[state.currCard]);
+  showElement(invisibleCardEl);
 }
 
 function currentDeckSize() {

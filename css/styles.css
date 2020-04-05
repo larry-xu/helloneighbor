@@ -30,8 +30,19 @@ body {
   color: #333;
 }
 
+.card-container {
+  width: 300px;
+  height: 420px;
+  position: relative;
+}
+
+.card-container:first-child {
+  margin-right: 150px;
+}
+
 .card {
   box-sizing: border-box;
+  position: absolute;
   width: 300px;
   height: 420px;
   padding: 30px 45px;
@@ -52,7 +63,6 @@ body {
 
 .front {
   background-image: url("../images/card_front.png");
-  margin-left: 150px;
 }
 
 .back {
@@ -62,8 +72,12 @@ body {
 }
 
 .invisible {
-  visibility: hidden;
   opacity: 0;
+  z-index: -1;
+}
+
+.back.invisible:hover {
+  cursor: auto;
 }
 
 .question {
@@ -79,10 +93,6 @@ body {
 
 .source {
   font-size: 18px;
-}
-
-.card-container {
-  position: relative;
 }
 
 .counter {
