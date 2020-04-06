@@ -120,6 +120,14 @@ function keydownHandler(event) {
   }
 }
 
+function openInstructions() {
+  showElement(getElement("instructions-container"));
+}
+
+function closeInstructions() {
+  hideElement(getElement("instructions-container"));
+}
+
 function updateDeck(deck) {
   state.deck = deck;
   onStateChanged();
@@ -150,6 +158,8 @@ function main() {
   // Initialize event listeners.
   getElement("deck").addEventListener("click", showNextCard);
   document.addEventListener("keydown", keydownHandler);
+  getElement("open-instructions").addEventListener("click", openInstructions);
+  getElement("close-instructions").addEventListener("click", closeInstructions);
 }
 
 main();

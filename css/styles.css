@@ -2,7 +2,7 @@
   font-family: 'Tofino Pro';
   src: url('../fonts/tofinopro-book.woff2') format('woff2'),
        url('../fonts/tofinopro-book.woff') format('woff');
-  font-weight: normal;
+  font-weight: 300;
   font-style: normal;
 }
 
@@ -10,8 +10,24 @@
   font-family: 'Tofino Pro';
   src: url('../fonts/tofinopro-bookitalic.woff2') format('woff2'),
        url('../fonts/tofinopro-bookitalic.woff') format('woff');
-  font-weight: normal;
+  font-weight: 300;
   font-style: italic;
+}
+
+@font-face {
+  font-family: 'Tofino Pro';
+  src: url('../fonts/tofinopro-regular.woff2') format('woff2'),
+       url('../fonts/tofinopro-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Tofino Pro';
+  src: url('../fonts/tofinopro-medium.woff2') format('woff2'),
+       url('../fonts/tofinopro-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
 }
 
 html {
@@ -31,21 +47,28 @@ body {
 }
 
 .card-container {
-  width: 300px;
-  height: 420px;
   position: relative;
 }
 
-.card-container:first-child {
-  margin-right: 150px;
+.card-container.deck {
+  width: 150px;
+  height: 210px;
+}
+
+.card-container.current-card {
+  width: 300px;
+  height: 420px;
+}
+
+.card-container:last-of-type {
+  margin-left: 100px;
 }
 
 .card {
   box-sizing: border-box;
   position: absolute;
-  width: 300px;
-  height: 420px;
-  padding: 30px 45px;
+  width: 100%;
+  height: 100%;
   border-radius: 12px;
   box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15);
   background-size: cover;
@@ -62,6 +85,7 @@ body {
 }
 
 .front {
+  padding: 30px 45px;
   background-image: url("../images/card_front.png");
 }
 
@@ -83,11 +107,17 @@ body {
 .question {
   margin: auto;
   font-size: 24px;
-  line-height: 1.2;
+  line-height: 1.25;
+  color: #555;
+}
+
+.source-container {
+  font-weight: 300;
+  color: #888;
 }
 
 .italic {
-  font-size: 13px;
+  font-size: 14px;
   font-style: italic;
 }
 
@@ -98,6 +128,83 @@ body {
 .counter {
   position: absolute;
   bottom: -50px;
-  left: 20px;
+  left: 10px;
   color: #aaa;
+}
+
+.instructions-container {
+  box-sizing: border-box;
+  width: 340px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  padding: 20px;
+  background: #fff;
+  height: 100%;
+  border-right: 1px solid #ccc;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  transition: all 0.3s ease;
+}
+
+.instructions-container::-webkit-scrollbar {
+  display: none;
+}
+
+.instructions-header {
+  margin-top: 0;
+  font-size: 28px;
+  font-weight: 500;
+  color: #a45586;
+}
+
+.instructions-step-header {
+  margin-bottom: 8px;
+  font-weight: 500;
+  color: #a45586;
+}
+
+.instructions-step {
+  margin-top: 0;
+  color: #555;
+}
+
+.instructions-step:last-of-type {
+  margin-bottom: 0;
+}
+
+.instructions-separator {
+  border: none;
+  border-top: 1px solid #a45586;
+}
+
+.button {
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 30px;
+  color: #999;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: #666;
+}
+
+.open-instructions {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  font-size: 18px;
+}
+
+.close-instructions {
+  position: absolute;
+  right: 20px;
+}
+
+.close-instructions:before {
+  content: "\00d7";
 }
