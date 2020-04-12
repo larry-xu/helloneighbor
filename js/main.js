@@ -48,7 +48,7 @@ function isVisible(element) {
 }
 
 function getCardElement(filterFn) {
-  var cards = document.getElementsByClassName("card front");
+  var cards = getElement("current-card").getElementsByClassName("card front");
   cards = Array.prototype.slice.call(cards);
   cards = cards.filter(filterFn);
   if (cards.length === 0) {
@@ -63,10 +63,10 @@ function updateCurrCardUI() {
   if (visibleCardEl !== null) {
     hideElement(visibleCardEl);
   }
-  if (state.currCard === -1) {
+  if (state.revealedCard === -1) {
     return;
   }
-  updateCardContent(invisibleCardEl, state.deck[state.currCard]);
+  updateCardContent(invisibleCardEl, state.revealedCards[state.revealedCard]);
   showElement(invisibleCardEl);
 }
 
@@ -81,7 +81,12 @@ function updateDeckHeight(deckEl) {
 }
 
 function updateCounter() {
-  var content = currentDeckSize() + " / " + state.deck.length;
+  var deckSize = currentDeckSize();
+  if (deckSize === 0) {
+    getElement("deck-counter").textContent = "";
+    return;
+  }
+  var content = deckSize + " / " + state.deck.length;
   getElement("deck-counter").textContent = content;
 }
 
@@ -96,28 +101,68 @@ function updateDeckUI() {
   updateCounter();
 }
 
+function createCardElement(card) {
+  var cardEl = document.createElement("div");
+  cardEl.className = "card front";
+  var questionEl = document.createElement("div");
+  questionEl.className = "question";
+  questionEl.textContent = card.question;
+  cardEl.appendChild(questionEl);
+  var sourceContainerEl = document.createElement("div");
+  sourceContainerEl.className = "source-container";
+  var fromEl = document.createElement("span");
+  fromEl.className = "italic";
+  fromEl.textContent = "from";
+  sourceContainerEl.appendChild(fromEl);
+  var sourceEl = document.createElement("div");
+  sourceEl.className = "source";
+  sourceEl.textContent = card.source;
+  sourceContainerEl.appendChild(sourceEl);
+  cardEl.appendChild(sourceContainerEl);
+  return cardEl;
+}
+
+function createCardContainerElement(revealedCard) {
+  var cardContainerEl = document.createElement("div");
+  cardContainerEl.className = "card-container small";
+  var card = state.revealedCards[revealedCard];
+  var cardEl = createCardElement(card);
+  cardContainerEl.appendChild(cardEl);
+  return cardContainerEl;
+}
+
+function updateRevealedCardsUI() {
+  var revealedCard = state.revealedCards.length - 1;
+  var cardContainerEl = createCardContainerElement(revealedCard);
+  getElement("revealed-cards").appendChild(cardContainerEl);
+  cardContainerEl.addEventListener("click", function() {
+    updateRevealedCard(revealedCard);
+  });
+}
+
+function updateRevealedCardFocusUI() {
+  var containerEl = getElement("revealed-cards");
+  var revealedCardsEls = Array.from(
+    containerEl.getElementsByClassName("card-container")
+  );
+  revealedCardsEls.forEach(function(el, idx) {
+    if (idx === state.revealedCard) {
+      el.classList.add("active");
+    } else {
+      el.classList.remove("active");
+    }
+  });
+}
+
 function showNextCard() {
   if (state.currCard === state.deck.length - 1) {
     return;
   }
   updateCurrCard(state.currCard + 1);
-}
-
-function showPrevCard() {
-  if (state.currCard === -1) {
-    return;
-  }
-  updateCurrCard(state.currCard - 1);
-}
-
-function keydownHandler(event) {
-  if (event.keyCode === 37) {
-    // left arrow
-    showPrevCard();
-  } else if (event.keyCode === 39) {
-    // right arrow
-    showNextCard();
-  }
+  updateRevealedCards(
+    state.revealedCards.concat(state.deck[state.currCard])
+  );
+  updateRevealedCard(state.revealedCards.length - 1);
 }
 
 function openInstructions() {
@@ -130,34 +175,46 @@ function closeInstructions() {
 
 function updateDeck(deck) {
   state.deck = deck;
-  onStateChanged();
+  updateDeckUI();
 }
 
 function updateCurrCard(currCard) {
   state.currCard = currCard;
-  onStateChanged();
+  updateDeckUI();
 }
 
-function onStateChanged() {
+function updateRevealedCards(revealedCards) {
+  if (revealedCards === state.revealedCards) {
+    return;
+  }
+  state.revealedCards = revealedCards;
+  updateRevealedCardsUI();
+}
+
+function updateRevealedCard(revealedCard) {
+  state.revealedCard = revealedCard;
   updateCurrCardUI();
-  updateDeckUI();
+  updateRevealedCardFocusUI();
 }
 
 // deck: array of cards in the deck
 // currCard: index of the current card shown
+// revealedCards: array of revealed cards
+// revealedCard: index of the revealed card shown
 var state = {
   deck: [],
-  currCard: -1
+  currCard: -1,
+  revealedCards: [],
+  revealedCard: -1
 };
 
 function main() {
   // Initialize state.
   // cards is defined globally in cards.js
-  updateDeck(createDeck(cards));
+  updateDeck(createDeck(CARDS));
 
   // Initialize event listeners.
   getElement("deck").addEventListener("click", showNextCard);
-  document.addEventListener("keydown", keydownHandler);
   getElement("open-instructions").addEventListener("click", openInstructions);
   getElement("close-instructions").addEventListener("click", closeInstructions);
 }

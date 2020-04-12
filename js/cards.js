@@ -1,4 +1,4 @@
-var cards = [
+var CARDS = [
   {
     level: 1,
     question: "What types of books would we find on your bookshelf? Which book has most influenced you?",
@@ -45,6 +45,7 @@ var cards = [
     source: "Jess T."
   },
   {
+    level: 3,
     question: "What is something beautiful you've seen or felt recently?",
     source: "Lauren C."
   },

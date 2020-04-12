@@ -50,18 +50,16 @@ body {
   position: relative;
 }
 
-.card-container.deck {
+.card-container.small {
   width: 150px;
   height: 210px;
+  margin-right: 30px;
+  margin-bottom: 30px;
 }
 
-.card-container.current-card {
+.card-container.large {
   width: 300px;
   height: 420px;
-}
-
-.card-container:last-of-type {
-  margin-left: 100px;
 }
 
 .card {
@@ -80,19 +78,40 @@ body {
   transition: all 0.3s ease;
 }
 
-.card:hover {
-  transform: scale(1.05);
-}
-
-.front {
+.card.front {
   padding: 30px 45px;
   background-image: url("../images/card_front.png");
 }
 
-.back {
-  background-image: url("../images/card_back.png");
+.card-container.small > .card {
+  border-radius: 6px;
   cursor: pointer;
+}
+
+.card-container.small > .card.front {
+  padding: 15px 22.5px;
+}
+
+.card-container.small > .card.back:hover {
+  transform: scale(1.05);
+}
+
+.card-container.small.active > .card {
+  outline: 7px solid #c65d69;
+}
+
+.card.back {
+  background-image: url("../images/card_back.png");
   box-shadow: 0 10px #b0b0b0, 0 2px 6px 2px rgba(0, 0, 0, 0.15)
+}
+
+.current-card-container {
+  box-sizing: border-box;
+  height: 100%;
+  padding-left: 20px;
+  display: flex;
+  align-items: center;
+  border-left: 1px solid #ccc;
 }
 
 .invisible {
@@ -111,6 +130,10 @@ body {
   color: #555;
 }
 
+.card-container.small .question {
+  font-size: 12px;
+}
+
 .source-container {
   font-weight: 300;
   color: #888;
@@ -121,8 +144,16 @@ body {
   font-style: italic;
 }
 
+.card-container.small .italic {
+  font-size: 7px;
+}
+
 .source {
   font-size: 18px;
+}
+
+.card-container.small .source {
+  font-size: 9px;
 }
 
 .counter {
@@ -207,4 +238,27 @@ body {
 
 .close-instructions:before {
   content: "\00d7";
+}
+
+.revealed-cards-container {
+  box-sizing: border-box;
+  height: 100%;
+  padding: 20px 0;
+}
+
+.revealed-cards {
+  box-sizing: border-box;
+  width: 740px;
+  height: 100%;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+}
+
+.revealed-cards::-webkit-scrollbar {
+  display: none;
 }
