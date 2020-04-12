@@ -178,10 +178,15 @@ body {
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
   transition: all 0.3s ease;
+  z-index: 1;
 }
 
 .instructions-container::-webkit-scrollbar {
   display: none;
+}
+
+.instructions-container.invisible {
+  z-index: -1;
 }
 
 .instructions-header {
