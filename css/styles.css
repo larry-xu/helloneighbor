@@ -37,7 +37,7 @@ html {
 body {
   height: 100%;
   min-width: 800px;
-  min-height: 540px;
+  min-height: 460px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -88,6 +88,10 @@ body {
   cursor: pointer;
 }
 
+.card-container.small.active > .card {
+  cursor: auto;
+}
+
 .card-container.small > .card.front {
   padding: 15px 22.5px;
 }
@@ -116,7 +120,7 @@ body {
 .current-card-container {
   box-sizing: border-box;
   height: 100%;
-  padding-left: 20px;
+  padding-left: 40px;
   display: flex;
   align-items: center;
   border-left: 1px solid #ccc;
@@ -172,8 +176,10 @@ body {
 }
 
 .instructions-modal-container {
+  box-sizing: border-box;
   width: 100%;
   height: 100%;
+  padding: 30px;
   position: absolute;
   display: flex;
   justify-content: center;
@@ -190,6 +196,8 @@ body {
 .instructions-modal {
   box-sizing: border-box;
   width: 540px;
+  height: 100%;
+  max-height: 580px;
   padding: 20px;
   background: #fff;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
@@ -288,7 +296,7 @@ body {
 
 .revealed-cards {
   box-sizing: border-box;
-  width: 740px;
+  width: 200px;
   height: 100%;
   padding: 10px;
   display: flex;
@@ -301,4 +309,34 @@ body {
 
 .revealed-cards::-webkit-scrollbar {
   display: none;
+}
+
+@media (min-width: 1000px) {
+  .revealed-cards {
+    width: 380px;
+  }
+}
+
+@media (min-width: 1180px) {
+  .revealed-cards {
+    width: 560px;
+  }
+}
+
+@media (min-width: 1360px) {
+  .revealed-cards {
+    width: 740px;
+  }
+}
+
+@media (min-width: 1540px) {
+  .revealed-cards {
+    width: 920px;
+  }
+}
+
+@media (min-width: 1720px) {
+  .revealed-cards {
+    width: 1100px;
+  }
 }
