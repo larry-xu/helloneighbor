@@ -166,11 +166,18 @@ function showNextCard() {
 }
 
 function openInstructions() {
-  showElement(getElement("instructions-container"));
+  showElement(getElement("instructions-modal-container"));
 }
 
 function closeInstructions() {
-  hideElement(getElement("instructions-container"));
+  hideElement(getElement("instructions-modal-container"));
+}
+
+function instructionsModalClick(e) {
+  if (getElement("instructions-modal").contains(e.target)) {
+    return;
+  }
+  closeInstructions();
 }
 
 function updateDeck(deck) {
@@ -217,6 +224,7 @@ function main() {
   getElement("deck").addEventListener("click", showNextCard);
   getElement("open-instructions").addEventListener("click", openInstructions);
   getElement("close-instructions").addEventListener("click", closeInstructions);
+  getElement("instructions-modal-container").addEventListener("click", instructionsModalClick);
 }
 
 main();

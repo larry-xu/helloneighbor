@@ -9,20 +9,28 @@
 </head>
 <body>
   <button id="open-instructions" class="button open-instructions">Instructions</button>
-  <div id="instructions-container" class="instructions-container invisible">
-    <button id="close-instructions" class="button close-instructions"></button>
-    <h1 class="instructions-header">Instructions</h1>
-    <h3 class="instructions-step-header">Step One</h3>
-    <p class="instructions-step">Begin with the person who has done Hello Neighbor the most times. Intros can include family, hometown, hobbies, what sparks joy, etc. Continue introductions clockwise.</p>
-    <hr class="instructions-separator" />
-    <h3 class="instructions-step-header">Step Two</h3>
-    <p class="instructions-step">Once introductions are done, the person who started will draw and answer a question card. Follow-up questions from participants are strongly encouraged.</p>
-    <hr class="instructions-separator" />
-    <h3 class="instructions-step-header">Step Three</h3>
-    <p class="instructions-step">Once the first person finishes their question, continue clockwise. The next person will draw a new question card. If you don’t like the question, you can draw another or answer a question previously drawn.</p>
-    <hr class="instructions-separator" />
-    <h3 class="instructions-step-header">Step Four</h3>
-    <p class="instructions-step">Keep drawing cards and answering questions until the time is up. The questions are meant to spark conversation. If something piques the group’s interest, feel free to spend as long as you want on the topic. Enjoy the conversation!</p>
+  <div id="instructions-modal-container" class="instructions-modal-container">
+    <div id="instructions-modal" class="instructions-modal">
+      <div class="instructions-container">
+        <div class="instructions-header">
+          <h1 class="instructions-title">Instructions</h1>
+          <button id="close-instructions" class="button close-instructions"></button>
+        </div>
+        <div class="instructions-body">
+          <h3 class="instructions-step-header">Step One</h3>
+          <p class="instructions-step">Begin with the person who has done Hello Neighbor the most times. Intros can include family, hometown, hobbies, what sparks joy, etc. Continue introductions clockwise.</p>
+          <hr class="instructions-separator" />
+          <h3 class="instructions-step-header">Step Two</h3>
+          <p class="instructions-step">Once introductions are done, the person who started will draw and answer a question card. Follow-up questions from participants are strongly encouraged.</p>
+          <hr class="instructions-separator" />
+          <h3 class="instructions-step-header">Step Three</h3>
+          <p class="instructions-step">Once the first person finishes their question, continue clockwise. The next person will draw a new question card. If you don’t like the question, you can draw another or answer a question previously drawn.</p>
+          <hr class="instructions-separator" />
+          <h3 class="instructions-step-header">Step Four</h3>
+          <p class="instructions-step">Keep drawing cards and answering questions until the time is up. The questions are meant to spark conversation. If something piques the group’s interest, feel free to spend as long as you want on the topic. Enjoy the conversation!</p>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="card-container small">
     <div id="deck" class="card back"></div>
