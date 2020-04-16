@@ -162,6 +162,7 @@ body {
 
 .source {
   font-size: 18px;
+  white-space: pre;
 }
 
 .card-container.small .source {
