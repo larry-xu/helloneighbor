@@ -36,14 +36,16 @@ html {
 
 body {
   height: 100%;
-  min-width: 800px;
-  min-height: 460px;
+  min-width: 830px;
+  min-height: 560px;
   display: flex;
   justify-content: center;
   align-items: center;
   background-color: #f9f9f9;
   font-family: "Tofino Pro", Helvetica, Arial, sans-serif;
   color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .card-container {
@@ -58,8 +60,8 @@ body {
 }
 
 .card-container.large {
-  width: 300px;
-  height: 420px;
+  width: 375px;
+  height: 530px;
 }
 
 .card {
@@ -79,7 +81,7 @@ body {
 }
 
 .card.front {
-  padding: 30px 45px;
+  padding: 37.5px 56.25px;
   background-image: url("../images/card_front.png");
 }
 
@@ -137,7 +139,7 @@ body {
 
 .question {
   margin: auto;
-  font-size: 24px;
+  font-size: 30px;
   line-height: 1.25;
   color: #555;
 }
@@ -196,9 +198,9 @@ body {
 
 .instructions-modal {
   box-sizing: border-box;
-  width: 540px;
+  width: 620px;
   height: 100%;
-  max-height: 580px;
+  max-height: 910px;
   padding: 20px;
   background: #fff;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
@@ -211,6 +213,7 @@ body {
 }
 
 .instructions-body {
+  font-size: 23px;
   overflow-y: scroll;
   scrollbar-width: none; /* Firefox */
   -ms-overflow-style: none; /* IE 10+ */
@@ -227,20 +230,21 @@ body {
 
 .instructions-title {
   margin: 0;
-  font-size: 28px;
+  font-size: 36px;
   font-weight: 500;
   color: #a45586;
 }
 
 .instructions-step-header {
-  margin-bottom: 8px;
-  font-weight: 500;
+  margin-bottom: 14px;
+  font-weight: 300;
   color: #a45586;
 }
 
 .instructions-step {
   margin-top: 0;
   color: #555;
+  line-height: 1.3;
 }
 
 .instructions-step:last-of-type {
