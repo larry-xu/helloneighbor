@@ -200,7 +200,7 @@ body {
   box-sizing: border-box;
   width: 750px;
   height: 100%;
-  max-height: 880px;
+  max-height: 890px;
   padding: 20px;
   background: #fff;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
@@ -225,6 +225,7 @@ body {
 
 .instructions-header {
   display: flex;
+  height: 41px;
   margin-bottom: 5px;
 }
 
@@ -293,7 +294,7 @@ body {
 }
 
 .close-instructions {
-  height: 20px;
+  height: 28px;
   padding: 0;
   margin-left: auto;
   line-height: 0.6;
