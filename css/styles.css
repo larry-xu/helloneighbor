@@ -36,8 +36,8 @@ html {
 
 body {
   height: 100%;
-  min-width: 830px;
-  min-height: 560px;
+  min-width: 800px;
+  min-height: 530px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -293,8 +293,11 @@ body {
 }
 
 .close-instructions {
+  height: 20px;
+  padding: 0;
   margin-left: auto;
-  line-height: 0.2;
+  line-height: 0.6;
+  font-size: 48px;
 }
 
 .close-instructions:before {
