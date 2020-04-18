@@ -198,9 +198,9 @@ body {
 
 .instructions-modal {
   box-sizing: border-box;
-  width: 620px;
+  width: 750px;
   height: 100%;
-  max-height: 910px;
+  max-height: 880px;
   padding: 20px;
   background: #fff;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
