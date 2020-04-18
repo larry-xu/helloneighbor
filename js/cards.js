@@ -25,11 +25,6 @@ var CARDS = [
     source: "Lauren C."
   },
   {
-    level: 2,
-    question: "What advice would you give your younger self? Do you think your younger self would have believed you?",
-    source: "Caroline D."
-  },
-  {
     level: 3,
     question: "What is a defining moment in your life that changed the way you viewed the world?",
     source: "Patrick X."
@@ -43,11 +38,6 @@ var CARDS = [
     level: 1,
     question: "What types of books would we find on your bookshelf? Which book (or podcast) has most influenced you?",
     source: "Kristen S. & Willie H."
-  },
-  {
-    level: 1,
-    question: "What is the most interesting fact about the place you grew up?",
-    source: "Patrick X."
   },
   {
     level: 1,
@@ -93,11 +83,6 @@ var CARDS = [
     level: 1,
     question: "What is a place that has a lot of meaning to you and why?",
     source: "Carly M."
-  },
-  {
-    level: 3,
-    question: "What do you want to do before you die?",
-    source: "The Buried Life"
   },
   {
     level: 2,
@@ -158,5 +143,10 @@ var CARDS = [
     level: 2,
     question: "What is your most treasured or most terrible memory?",
     source: "36 Questions"
+  },
+  {
+    level: 3,
+    question: "If you could hold on to one memory from your life forever, what would that be?",
+    source: "Storycorps"
   }
 ];
