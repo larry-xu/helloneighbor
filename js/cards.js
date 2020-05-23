@@ -148,5 +148,15 @@ var CARDS = [
     level: 3,
     question: "If you could hold on to one memory from your life forever, what would that be?",
     source: "Storycorps"
+  },
+  {
+    level: 3,
+    question: "What matters to you that may not matter for others?",
+    source: "Vaibhav S."
+  },
+  {
+    level: 2,
+    question: "What is one thing from this year, big or small, that you are proud of?",
+    source: "Anne G. & Daniel T."
   }
 ];
