@@ -180,6 +180,34 @@ function instructionsModalClick(e) {
   closeInstructions();
 }
 
+function unfadeElement(element) {
+  if (!element.classList.contains("faded")) {
+    return;
+  }
+  element.classList.remove("faded");
+}
+
+function fadeElement(element) {
+  if (element.classList.contains("faded")) {
+    return;
+  }
+  element.classList.add("faded");
+}
+
+function showInstructionsTab() {
+  fadeElement(getElement("tips-tab"));
+  unfadeElement(getElement("instructions-tab"));
+  hideElement(getElement("tips-body"));
+  showElement(getElement("instructions-body"));
+}
+
+function showTipsTab() {
+  fadeElement(getElement("instructions-tab"));
+  unfadeElement(getElement("tips-tab"));
+  hideElement(getElement("instructions-body"));
+  showElement(getElement("tips-body"));
+}
+
 function updateDeck(deck) {
   state.deck = deck;
   updateDeckUI();
@@ -225,6 +253,8 @@ function main() {
   getElement("open-instructions").addEventListener("click", openInstructions);
   getElement("close-instructions").addEventListener("click", closeInstructions);
   getElement("instructions-modal-container").addEventListener("click", instructionsModalClick);
+  getElement("instructions-tab").addEventListener("click", showInstructionsTab);
+  getElement("tips-tab").addEventListener("click", showTipsTab);
 }
 
 main();
