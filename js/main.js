@@ -1,3 +1,26 @@
+var PROXY = "https://cors-anywhere.herokuapp.com/"
+var CARDS_SOURCE = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5OnXLZyogXjLSenOoBtOzqCamqwWdeNNCBTOmN9gqf5rC8I35kx-c8JfZxmw4iB4P4suRJW9fpn7x/pub?gid=167052444&single=true&output=csv";
+
+function getCards(cb) {
+  var url = PROXY + CARDS_SOURCE;
+  Papa.parse(url, {
+    download: true,
+    header: true,
+    skipEmptyLines: "greedy",
+    complete: function(results) {
+      var cards = results.data.filter(function(d) {
+        return d["Online"] === "Active";
+      }).map(function(d) {
+        return {
+          question: d["Question"],
+          source: d["Submitted By"]
+        };
+      });
+      cb(cards);
+    }
+  });
+}
+
 function shuffle(array) {
   var i, j, t;
   for (i = array.length - 1; i > 0; i--) {
@@ -245,8 +268,9 @@ var state = {
 
 function main() {
   // Initialize state.
-  // cards is defined globally in cards.js
-  updateDeck(createDeck(CARDS));
+  getCards(function(cards) {
+    updateDeck(createDeck(cards));
+  })
 
   // Initialize event listeners.
   getElement("deck").addEventListener("click", showNextCard);
