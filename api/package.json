@@ -1,0 +1,9 @@
+{
+  "name": "helloneighbor",
+  "version": "1.0.0",
+  "description": "Hello Neighbor cards json endpoint",
+  "main": "index.js",
+  "dependencies": {
+    "papaparse": "^5.2.0"
+  }
+}
