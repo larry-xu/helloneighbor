@@ -8,13 +8,12 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <button id="open-instructions" class="button open-instructions">Instructions</button>
   <div id="instructions-modal-container" class="instructions-modal-container">
     <div id="instructions-modal" class="instructions-modal">
       <div class="instructions-container">
         <div class="instructions-header">
           <h1 id="instructions-tab" class="tab-title">Instructions</h1>
-          <h1 id="tips-tab" class="tab-title tips-title faded">Tips</h1>
+          <h1 id="tips-tab" class="tab-title tips-title faded">Ground Rules</h1>
           <button id="close-instructions" class="button close-instructions"></button>
         </div>
         <div class="tab-container">
@@ -48,30 +47,39 @@
       </div>
     </div>
   </div>
-  <div class="card-container small">
-    <div id="deck" class="card back"></div>
-    <div id="deck-counter" class="counter"></div>
+  <div class="main-container">
+    <div class="header">
+      <div class="logo">Hello Neighbor</div>
+      <div class="links">
+        <button id="open-instructions" class="button open-instructions">Instructions</button>
+        <button id="open-rules" class="button open-rules">Ground Rules</button>
+        <span>Join</span>
+      </div>
+    </div>
+    <h1 class="title">Community Conversation Cards</h1>
+    <p class="description">These cards were sourced from the community as a way to make time and space to share a meaningful conversation with someone new.</p>
+    <div id="current-card" class="card-container large">
+      <div id="deck" class="card back"></div>
+      <div class="card front invisible">
+        <div class="question"></div>
+        <div class="source-container">
+          <span class="italic">from</span>
+          <div class="source"></div>
+        </div>
+      </div>
+      <div class="card front invisible">
+        <div class="question"></div>
+        <div class="source-container">
+          <span class="italic">from</span>
+          <div class="source"></div>
+        </div>
+      </div>
+    </div>
+    <button id="add-button" class="button add-button">+</button>
+    <div id="deck-counter" class="counter invisible"></div>
   </div>
   <div class="revealed-cards-container">
     <div id="revealed-cards" class="revealed-cards">
-    </div>
-  </div>
-  <div class="current-card-container">
-    <div id="current-card" class="card-container large">
-      <div class="card front invisible">
-        <div class="question"></div>
-        <div class="source-container">
-          <span class="italic">from</span>
-          <div class="source"></div>
-        </div>
-      </div>
-      <div class="card front invisible">
-        <div class="question"></div>
-        <div class="source-container">
-          <span class="italic">from</span>
-          <div class="source"></div>
-        </div>
-      </div>
     </div>
   </div>
 

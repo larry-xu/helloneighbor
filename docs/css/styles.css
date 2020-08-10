@@ -30,22 +30,97 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('../fonts/AvenirNext-Medium.woff2') format('woff2'),
+       url('../fonts/AvenirNext-Medium.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Avenir Next';
+  src: url('../fonts/AvenirNext-DemiBold.woff2') format('woff2'),
+       url('../fonts/AvenirNext-DemiBold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
 html {
   height: 100%;
 }
 
 body {
   height: 100%;
-  min-width: 800px;
-  min-height: 530px;
+  min-width: 830px;
+  min-height: 790px;
   display: flex;
-  justify-content: center;
-  align-items: center;
   background-color: #f9f9f9;
-  font-family: "Tofino Pro", Helvetica, Arial, sans-serif;
+  font-family: "Avenir Next", Helvetica, Arial, sans-serif;
   color: #333;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+.main-container {
+  box-sizing: border-box;
+  height: 100%;
+  width: 550px;
+  padding: 40px 40px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffffff;
+}
+
+.header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.logo {
+  font-size: 1.125em;
+  font-weight: 700;
+  color: #666;
+}
+
+.links {
+  display: flex;
+  color: #999;
+  font-size: 0.875em;
+  line-height: 1.5;
+}
+
+.links > * + * {
+  margin-left: 15px;
+}
+
+.title {
+  width: 100%;
+  margin-bottom: 0;
+}
+
+.description {
+  width: 100%;
+  margin-bottom: 30px;
+  line-height: 1.4;
+}
+
+.button.add-button {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 15px;
+  font-size: 24px;
+  color: #ffffff;
+  background: rgb(230,100,70);
+  background: linear-gradient(135deg, rgba(230,100,70,1) 0%, rgba(140,80,150,1) 100%);
+  border-radius: 25px;
+}
+
+.button.add-button:hover {
+  color: #ffffff;
 }
 
 .card-container {
@@ -60,8 +135,9 @@ body {
 }
 
 .card-container.large {
-  width: 375px;
-  height: 530px;
+  width: 300px;
+  height: 420px;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -70,9 +146,10 @@ body {
   width: 100%;
   height: 100%;
   border-radius: 12px;
-  box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 6px 20px 6px rgba(0, 0, 0, 0.25);
   background-size: cover;
   background-position: center;
+  font-family: "Tofino Pro", Helvetica, Arial, sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -81,11 +158,12 @@ body {
 }
 
 .card.front {
-  padding: 37.5px 56.25px;
+  padding: 30px 45px;
   background-image: url("../images/card_front.png");
 }
 
 .card-container.small > .card {
+  box-shadow: 0 2px 6px 2px rgba(0, 0, 0, 0.35);
   border-radius: 6px;
   cursor: pointer;
 }
@@ -102,12 +180,8 @@ body {
   transform: scale(1.05);
 }
 
-.card-container.small.active > .card {
-  outline: 7px solid #c65d69;
-}
-
 .revealed-cards > .card-container {
-  opacity: 0.5;
+  opacity: 0.6;
 }
 
 .revealed-cards > .card-container.active {
@@ -116,20 +190,13 @@ body {
 
 .card.back {
   background-image: url("../images/card_back.png");
-  box-shadow: 0 10px #b0b0b0, 0 2px 6px 2px rgba(0, 0, 0, 0.15)
-}
-
-.current-card-container {
-  box-sizing: border-box;
-  height: 100%;
-  padding-left: 40px;
-  display: flex;
-  align-items: center;
-  border-left: 1px solid #ccc;
 }
 
 .invisible {
   opacity: 0;
+}
+
+.tab-contents.invisible {
   z-index: -1;
 }
 
@@ -139,7 +206,7 @@ body {
 
 .question {
   margin: auto;
-  font-size: 30px;
+  font-size: 24px;
   line-height: 1.25;
   color: #555;
 }
@@ -172,9 +239,6 @@ body {
 }
 
 .counter {
-  position: absolute;
-  bottom: -50px;
-  left: 10px;
   color: #aaa;
 }
 
@@ -185,7 +249,7 @@ body {
   padding: 30px;
   position: absolute;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   background: rgba(0, 0, 0, 0.3);
   z-index: 1;
@@ -202,6 +266,7 @@ body {
   height: 100%;
   max-height: 800px;
   padding: 40px;
+  margin-right: 100px;
   background: #fff;
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.15);
 }
@@ -231,8 +296,6 @@ body {
   transition: all 0.3s ease;
 
   overflow-y: scroll;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
 }
 
 .tab-contents::-webkit-scrollbar {
@@ -242,8 +305,7 @@ body {
 .tab-title {
   margin: 0;
   font-size: 36px;
-  font-weight: 500;
-  color: #a45586;
+  font-weight: 700;
   transition: all 0.3s ease;
 }
 
@@ -269,8 +331,9 @@ body {
 
 .instructions-step-header {
   margin-bottom: 14px;
-  font-weight: 300;
-  color: #a45586;
+  font-weight: 700;
+  font-size: 30px;
+  color: #333;
 }
 
 .instructions-step {
@@ -292,36 +355,12 @@ body {
   background: none;
   border: none;
   outline: none;
-  font-size: 30px;
   color: #999;
 }
 
 .button:hover {
   cursor: pointer;
   color: #666;
-}
-
-.open-instructions {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  padding: 6px 10px;
-  font-size: 18px;
-  line-height: 1;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #eee;
-  box-shadow: 0 3px 0 0 #bbb;
-}
-
-.open-instructions:hover {
-  color: #777;
-  background: #ddd;
-}
-
-.open-instructions:before {
-  content: "≡";
-  margin-right: 6px;
 }
 
 .close-instructions {
@@ -339,7 +378,11 @@ body {
 .revealed-cards-container {
   box-sizing: border-box;
   height: 100%;
-  padding: 20px 0;
+  padding: 40px;
+  flex-grow: 1;
+  background: rgb(230,100,70);
+  background: linear-gradient(135deg, rgba(230,100,70,1) 0%, rgba(140,80,150,1) 100%);
+  box-shadow: inset 6px 0 8px rgba(0,0,0,0.25);
 }
 
 .revealed-cards {
@@ -359,31 +402,31 @@ body {
   display: none;
 }
 
-@media (min-width: 1000px) {
+@media (min-width: 1020px) {
   .revealed-cards {
     width: 380px;
   }
 }
 
-@media (min-width: 1180px) {
+@media (min-width: 1200px) {
   .revealed-cards {
     width: 560px;
   }
 }
 
-@media (min-width: 1360px) {
+@media (min-width: 1380px) {
   .revealed-cards {
     width: 740px;
   }
 }
 
-@media (min-width: 1540px) {
+@media (min-width: 1560px) {
   .revealed-cards {
     width: 920px;
   }
 }
 
-@media (min-width: 1720px) {
+@media (min-width: 1740px) {
   .revealed-cards {
     width: 1100px;
   }

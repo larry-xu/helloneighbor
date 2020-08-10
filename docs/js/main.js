@@ -72,35 +72,25 @@ function updateCurrCardUI() {
   showElement(invisibleCardEl);
 }
 
-function currentDeckSize() {
-  return state.deck.length - state.currCard - 1;
-}
-
-function updateDeckHeight(deckEl) {
-  var shadowSize = 10 * currentDeckSize() / state.deck.length;
-  var boxShadow = "0 " + shadowSize + "px #b0b0b0, 0 2px 6px 2px rgba(0, 0, 0, 0.15)";
-  deckEl.style.boxShadow = boxShadow;
-}
-
 function updateCounter() {
-  var deckSize = currentDeckSize();
-  if (deckSize === 0) {
-    getElement("deck-counter").textContent = "";
-    return;
-  }
-  var content = deckSize + " / " + state.deck.length;
+  var content = (state.currCard + 1) + " / " + state.deck.length;
   getElement("deck-counter").textContent = content;
 }
 
 function updateDeckUI() {
-  var deckEl = getElement("deck");
+  var buttonEl = getElement("add-button");
   if (state.currCard === state.deck.length - 1) {
-    hideElement(deckEl);
+    hideElement(buttonEl);
   } else {
-    showElement(deckEl);
-    updateDeckHeight(deckEl);
+    showElement(buttonEl);
   }
   updateCounter();
+  if (state.currCard === 0) {
+    var deckEl = getElement("deck");
+    hideElement(deckEl);
+    var counterEl = getElement("deck-counter");
+    showElement(counterEl);
+  }
 }
 
 function createCardElement(card) {
@@ -168,11 +158,17 @@ function showNextCard() {
 }
 
 function openInstructions() {
+  showInstructionsTab();
   showElement(getElement("instructions-modal-container"));
 }
 
 function closeInstructions() {
   hideElement(getElement("instructions-modal-container"));
+}
+
+function openRules() {
+  showTipsTab();
+  showElement(getElement("instructions-modal-container"));
 }
 
 function instructionsModalClick(e) {
@@ -212,7 +208,6 @@ function showTipsTab() {
 
 function updateDeck(deck) {
   state.deck = deck;
-  updateDeckUI();
 }
 
 function updateCurrCard(currCard) {
@@ -254,8 +249,9 @@ function main() {
     });
 
   // Initialize event listeners.
-  getElement("deck").addEventListener("click", showNextCard);
+  getElement("add-button").addEventListener("click", showNextCard);
   getElement("open-instructions").addEventListener("click", openInstructions);
+  getElement("open-rules").addEventListener("click", openRules);
   getElement("close-instructions").addEventListener("click", closeInstructions);
   getElement("instructions-modal-container").addEventListener("click", instructionsModalClick);
   getElement("instructions-tab").addEventListener("click", showInstructionsTab);
