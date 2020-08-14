@@ -25,7 +25,7 @@
             <p class="instructions-step">First person starts with an introduction. Intros could include family, hometown, hobbies, what sparks joy, etc. Continue introductions in the order your group decided.</p>
             <hr class="instructions-separator" />
             <h3 class="instructions-step-header">Step Three</h3>
-            <p class="instructions-step">Once introductions are done, draw a question card by clicking on the deck. The first person who introduced themself should answer. Follow-up questions from participants are strongly encouraged.</p>
+            <p class="instructions-step">Once introductions are done, draw a question card by clicking on the + button. The first person who introduced themself should answer. Follow-up questions from participants are strongly encouraged.</p>
             <hr class="instructions-separator" />
             <h3 class="instructions-step-header">Step Four</h3>
             <p class="instructions-step">After the first person finishes, draw a new question card. The next person should answer it, continuing in the order of introductions. If you don’t like the question, you can draw another or answer a question previously drawn.</p>
@@ -49,34 +49,39 @@
   </div>
   <div class="main-container">
     <div class="header">
-      <div class="logo"><a class="button" href="https://www.helloneighbordc.com/">Hello Neighbor</a></div>
+      <div class="logo"><a class="button" href="https://www.helloneighbordc.com/" target="_blank">Hello Neighbor</a></div>
       <div class="links">
         <button id="open-instructions" class="button open-instructions">Instructions</button>
         <button id="open-rules" class="button open-rules">Ground Rules</button>
-        <a class="button" href="https://www.helloneighbordc.com/sign-up">Join</a>
+        <a class="button" href="https://www.helloneighbordc.com/sign-up" target="_blank">Join</a>
       </div>
     </div>
     <h1 class="title">Community Conversation Cards</h1>
     <p class="description">These cards were sourced from the community as a way to make time and space to share a meaningful conversation with someone new. Feel free to submit your own question <strong><a class="link" href="https://docs.google.com/forms/d/e/1FAIpQLSdbKEL4RogOpBqMXOCqkxI-JAxN-Z09OAbtgvHuwATDh4-zjg/viewform" target="_blank">here</a></strong>!</p>
-    <div id="current-card" class="card-container large">
-      <div id="deck" class="card back"></div>
-      <div class="card front invisible">
-        <div class="question"></div>
-        <div class="source-container">
-          <span class="italic">from</span>
-          <div class="source"></div>
+    <div class="current-card-container">
+      <div class="spacer"></div>
+      <div id="current-card" class="card-container large">
+        <div id="deck" class="card back"></div>
+        <div class="card front invisible">
+          <div class="question"></div>
+          <div class="source-container">
+            <span class="italic">from</span>
+            <div class="source"></div>
+          </div>
+        </div>
+        <div class="card front invisible">
+          <div class="question"></div>
+          <div class="source-container">
+            <span class="italic">from</span>
+            <div class="source"></div>
+          </div>
         </div>
       </div>
-      <div class="card front invisible">
-        <div class="question"></div>
-        <div class="source-container">
-          <span class="italic">from</span>
-          <div class="source"></div>
-        </div>
+      <div class="add-container">
+        <button id="add-button" class="button add-button">+</button>
+        <div id="deck-counter" class="counter invisible">&nbsp;</div>
       </div>
     </div>
-    <button id="add-button" class="button add-button">+</button>
-    <div id="deck-counter" class="counter invisible"></div>
   </div>
   <div class="revealed-cards-container">
     <div id="revealed-cards" class="revealed-cards">
