@@ -1,4 +1,37 @@
-var CARDS_SOURCE = "https://www.larryxu.com/helloneighbor.json";
+var CARDS_SOURCE = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5OnXLZyogXjLSenOoBtOzqCamqwWdeNNCBTOmN9gqf5rC8I35kx-c8JfZxmw4iB4P4suRJW9fpn7x/pub?gid=167052444&single=true&output=csv";
+
+function getCardsFromUrl(cb) {
+  Papa.parse(CARDS_SOURCE, {
+    download: true,
+    header: true,
+    skipEmptyLines: "greedy",
+    complete: function(results) {
+      var cards = results.data.filter(function(d) {
+        return d["Online"] === "Active";
+      }).map(function(d) {
+        return {
+          question: d["Question"],
+          source: d["Submitted By"]
+        };
+      });
+      cb(cards);
+    }
+  });
+}
+
+function getCardsFromFile(cb) {
+  fetch("js/cards.json")
+    .then(function(resp) { return resp.json(); })
+    .then(function(cards) { cb(cards) });
+}
+
+function getCards(cb) {
+  try {
+    getCardsFromUrl(cb);
+  } catch (error) {
+    getCardsFromFile(cb);
+  }
+}
 
 function shuffle(array) {
   var i, j, t;
@@ -242,11 +275,9 @@ var state = {
 
 function main() {
   // Initialize state.
-  fetch(CARDS_SOURCE)
-    .then(function(resp) { return resp.json(); })
-    .then(function(cards) {
-      updateDeck(createDeck(cards));
-    });
+  getCards(function(cards) {
+    updateDeck(createDeck(cards));
+  });
 
   // Initialize event listeners.
   getElement("add-button").addEventListener("click", showNextCard);
