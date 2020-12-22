@@ -1,36 +1,49 @@
 var CARDS_SOURCE = "https://docs.google.com/spreadsheets/d/e/2PACX-1vR5OnXLZyogXjLSenOoBtOzqCamqwWdeNNCBTOmN9gqf5rC8I35kx-c8JfZxmw4iB4P4suRJW9fpn7x/pub?gid=167052444&single=true&output=csv";
+var PROXIED_CARDS_SOURCE = "https://www.larryxu.com/helloneighbor.json";
 
-function getCardsFromUrl(cb) {
-  Papa.parse(CARDS_SOURCE, {
-    download: true,
-    header: true,
-    skipEmptyLines: "greedy",
-    complete: function(results) {
-      var cards = results.data.filter(function(d) {
-        return d["Online"] === "Active";
-      }).map(function(d) {
-        return {
-          question: d["Question"],
-          source: d["Submitted By"]
-        };
-      });
-      cb(cards);
-    }
+function getCardsFromSource() {
+  return new Promise(function(resolve, reject) {
+    Papa.parse(CARDS_SOURCE, {
+      download: true,
+      header: true,
+      skipEmptyLines: "greedy",
+      complete: function(results) {
+        var cards = results.data.filter(function(d) {
+          return d["Online"] === "Active";
+        }).map(function(d) {
+          return {
+            question: d["Question"],
+            source: d["Submitted By"]
+          };
+        });
+        resolve(cards);
+      },
+      error: reject
+    });
   });
 }
 
+function getCardsFromProxy() {
+  return fetch(PROXIED_CARDS_SOURCE)
+    .then(function(resp) { return resp.json(); });
+}
+
 function getCardsFromFile(cb) {
-  fetch("js/cards.json")
-    .then(function(resp) { return resp.json(); })
-    .then(function(cards) { cb(cards) });
+  return fetch("js/cards.json")
+    .then(function(resp) { return resp.json(); });
 }
 
 function getCards(cb) {
-  try {
-    getCardsFromUrl(cb);
-  } catch (error) {
-    getCardsFromFile(cb);
-  }
+  getCardsFromSource()
+    .then(cb)
+    .catch(function(error) {
+      getCardsFromProxy()
+        .then(cb)
+        .catch(function(error) {
+          getCardsFromFile(cb)
+            .then(cb);
+        })
+    });
 }
 
 function shuffle(array) {
